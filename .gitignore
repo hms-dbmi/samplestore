@@ -7,6 +7,8 @@ app/db.sqlite3
 
 app/error.log
 app/debug.log
+debug.log
+error.log
 
 .DS_Store
 

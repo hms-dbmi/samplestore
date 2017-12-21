@@ -126,7 +126,7 @@ ROOT_URLCONF = 'samplestore.urls'
 
 
 ########## APP CONFIGURATION
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,6 +136,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
 ]
+
+LOCAL_APPS = [
+]
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 ########## END APP CONFIGURATION
 
 
