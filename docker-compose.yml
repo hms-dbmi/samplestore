@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  samplestore:
+    container_name: samplestore
+    build: .
+    image: dbmi/samplestore
+    ports:
+      - "8001:8001"
