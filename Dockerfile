@@ -3,9 +3,9 @@ FROM dbmi/pynxgu
 COPY app /app
 RUN pip install -r /app/requirements.txt
 
-# RUN pip install awscli
+RUN pip install awscli
 
-# RUN apt-get update && apt-get install -y jq
+RUN apt-get update && apt-get install -y jq
 
 RUN mkdir /entry_scripts/
 COPY gunicorn-nginx-entry.sh /entry_scripts/
