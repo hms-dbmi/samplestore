@@ -89,7 +89,7 @@ class Assay(models.Model):
     reanalysis_id = models.ForeignKey("self", on_delete=models.PROTECT, blank=True, null=True, related_name="assay_reanalysis_id")
     assay_type = models.ForeignKey(AssayType, on_delete=models.PROTECT, related_name="assay_assay_type")
     assay_status = models.ForeignKey(AssayStatus, on_delete=models.PROTECT, related_name="assay_assay_status")
-    aliquot = models.ForeignKey(Aliquot, on_delete=models.PROTECT, related_name="assay_aliquot")
+    aliquot = models.ForeignKey(Aliquot, on_delete=models.PROTECT, related_name="assay_aliquot", blank=True, null=True)
     sample = models.ForeignKey(Sample, on_delete=models.PROTECT, related_name="assay_sample")
 
     def __str__(self):

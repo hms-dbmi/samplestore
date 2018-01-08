@@ -134,6 +134,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'api',
 ]
 
@@ -200,6 +201,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 ##### END AUTH CONFIG
 
+
+##### REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
+##### END REST FRAMEWORK CONFIG
 
 try:
     from .local_settings import *

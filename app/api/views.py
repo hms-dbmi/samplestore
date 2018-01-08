@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
 
 from api.serializers import SubjectSerializer
 from api.serializers import SampleTypeSerializer
@@ -30,6 +31,7 @@ from api.models import Interpretation
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    filter_fields = ('external_id',)
 
 class SampleTypeViewSet(viewsets.ModelViewSet):
     queryset = SampleType.objects.all()
@@ -38,6 +40,7 @@ class SampleTypeViewSet(viewsets.ModelViewSet):
 class SampleViewSet(viewsets.ModelViewSet):
     queryset = Sample.objects.all()
     serializer_class = SampleSerializer
+    filter_fields = ('subject__external_id',)
 
 class AliquotTypeViewSet(viewsets.ModelViewSet):
     queryset = AliquotType.objects.all()
@@ -62,6 +65,7 @@ class AssayStatusViewSet(viewsets.ModelViewSet):
 class AssayViewSet(viewsets.ModelViewSet):
     queryset = Assay.objects.all()
     serializer_class = AssaySerializer
+    filter_fields = ('sample__subject__external_id',)
 
 class SequencingFileViewSet(viewsets.ModelViewSet):
     queryset = SequencingFile.objects.all()
