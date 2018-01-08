@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import sys
-
+from django.utils.crypto import get_random_string
 from os.path import abspath, basename, dirname, join, normpath
 
 ########## PATH CONFIGURATION
@@ -78,8 +78,7 @@ STATICFILES_FINDERS = (
 
 
 ########## SECRET CONFIGURATION
-# TODO MOVE TO AWS PARAM STORE
-SECRET_KEY = ''
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, chars))
 ########## END SECRET CONFIGURATION
 
 

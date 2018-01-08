@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DJANGO_SECRET=$(aws ssm get-parameters --names $PS_PATH.django_secret --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+export SECRET_KEY=$DJANGO_SECRET
+
 FIRST_ADMIN_EMAIL="natebessa@gmail.com"
 
 cd /app/
