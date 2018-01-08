@@ -14,6 +14,7 @@ import os
 import sys
 from django.utils.crypto import get_random_string
 from os.path import abspath, basename, dirname, join, normpath
+from pythonpstore.pythonpstore import SecretStore
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
@@ -85,7 +86,15 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, chars))
 
 
 ########## SITE CONFIGURATION
-ALLOWED_HOSTS = []
+secret_store = SecretStore()
+PARAMETER_PATH = os.environ.get("PS_PATH", "")
+
+if PARAMETER_PATH:
+    ALLOWED_HOSTS = [secret_store.get_secret_for_key(PARAMETER_PATH + '.allowed_hosts')]
+    # RAVEN_URL = secret_store.get_secret_for_key(PARAMETER_PATH + '.raven_url') # For sentry.io
+else:
+    ALLOWED_HOSTS = ["localhost"]
+    # RAVEN_URL = ""
 ########## END SITE CONFIGURATION
 
 
