@@ -1,0 +1,70 @@
+[
+  {
+    "model": "api.AssayStatus",
+    "pk": 1,
+    "fields": {
+      "name": "Saved",
+      "description": "saved"
+    }
+  },
+  {
+    "model": "api.AssayStatus",
+    "pk": 2,
+    "fields": {
+      "name": "Submitted",
+      "description": "submitted"
+    }
+  },
+  {
+    "model": "api.AssayType",
+    "pk": 1,
+    "fields": {
+      "name": "Targeted Variant",
+      "description": "targeted variant"
+    }
+  },
+  {
+    "model": "api.AssayType",
+    "pk": 1,
+    "fields": {
+      "name": "Whole Exome",
+      "description": "whole exome"
+    }
+  },
+  {
+    "model": "api.AssayType",
+    "pk": 1,
+    "fields": {
+      "name": "Whole Genome",
+      "description": "whole genome"
+    }
+  },
+  {
+    "model": "api.AliquotQuality",
+    "pk": 1,
+    "fields": {
+      "code": "good",
+      "name": "Good",
+      "description": "Good"
+    }
+  },
+  {
+    "model": "api.AliquotType",
+    "pk": 1,
+    "fields": {
+      "code": "small",
+      "name": "Small",
+      "description": "Small"
+    }
+  },
+  {
+    "model": "api.SampleType",
+    "pk": 1,
+    "fields": {
+      "code": "blood",
+      "name": "Blood",
+      "description": "blood",
+      "location": "blood"
+    }
+  }
+]
