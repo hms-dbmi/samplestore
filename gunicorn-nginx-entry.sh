@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DJANGO_SECRET=$(aws ssm get-parameters --names $PS_PATH.django_secret --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+export SECRET_KEY=$DJANGO_SECRET
+
 FIRST_ADMIN_EMAIL="natebessa@gmail.com"
 
 cd /app/
@@ -17,4 +20,4 @@ python manage.py loaddata initial_data
 
 chown -R www-data:www-data /app
 
-gunicorn samplestore.wsgi:application -b 0.0.0.0:8002  --user=www-data --group=www-data
+gunicorn samplestore.wsgi:application -b 0.0.0.0:8001  --user=www-data --group=www-data

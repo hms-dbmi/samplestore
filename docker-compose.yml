@@ -6,4 +6,4 @@ services:
     build: .
     image: dbmi/samplestore
     ports:
-      - "8001:8001"
+      - "8000:8000"

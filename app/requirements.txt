@@ -1,4 +1,5 @@
 Django==2.0
-django-filter==1.1.0
 djangorestframework==3.7.4
+django-filter==1.1.0
+python-pstore==0.8
 pytz==2017.3
