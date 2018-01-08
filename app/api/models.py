@@ -1,14 +1,15 @@
+import uuid
 from django.db import models
 
 class Subject(models.Model):
     """
     This represents a person.
     """
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     external_id = models.CharField(max_length=255)
 
     def __str__(self):
-        return "%s %s" % self.uuid, self.external_id
+        return "%s %s" % (self.uuid, self.external_id)
 
 class SampleType(models.Model):
     code = models.CharField(max_length=255)
@@ -17,10 +18,10 @@ class SampleType(models.Model):
     location = models.CharField(max_length=255)
 
     def __str__(self):
-        return "%s %s %s" % self.code, self.name, self.location
+        return "%s %s %s" % (self.code, self.name, self.location)
 
 class Sample(models.Model):
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     obtained = models.DateTimeField()
     description = models.CharField(max_length=2048, blank=True, null=True)
@@ -28,7 +29,7 @@ class Sample(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name="sample_subject")
 
     def __str__(self):
-        return "%s %s %s" % self.name, self.sample_type.name, self.uuid
+        return "%s %s %s" % (self.name, self.sample_type.name, self.uuid)
 
 class AliquotType(models.Model):
     code = models.CharField(max_length=255)
@@ -36,7 +37,7 @@ class AliquotType(models.Model):
     description = models.CharField(max_length=2048, blank=True, null=True)
 
     def __str__(self):
-        return "%s %s" % self.code, self.name
+        return "%s %s" % (self.code, self.name)
 
 class AliquotQuality(models.Model):
     code = models.CharField(max_length=255)
@@ -44,10 +45,10 @@ class AliquotQuality(models.Model):
     description = models.CharField(max_length=2048, blank=True, null=True)
 
     def __str__(self):
-        return "%s %s" % self.code, self.name
+        return "%s %s" % (self.code, self.name)
 
 class Aliquot(models.Model):
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     prepared = models.DateTimeField()
     description = models.CharField(max_length=2048, blank=True, null=True)
@@ -59,7 +60,7 @@ class Aliquot(models.Model):
     aliquot_quality = models.ForeignKey(AliquotQuality, on_delete=models.PROTECT, related_name="aliquot_aliquot_quality")
 
     def __str__(self):
-        return "%s %s" % self.name, self.uuid
+        return "%s %s" % (self.name, self.uuid)
 
 class AssayType(models.Model):
     name = models.CharField(max_length=255)
@@ -76,7 +77,7 @@ class AssayStatus(models.Model):
         return "%s" % self.name
 
 class Assay(models.Model):
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     datetime = models.DateTimeField()
     lab_name = models.CharField(max_length=255, blank=True, null=True)
     rationale = models.CharField(max_length=255, blank=True, null=True)
@@ -95,7 +96,7 @@ class Assay(models.Model):
         return "%s" % self.uuid
 
 class SequencingFile(models.Model):
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     file_name = models.CharField(max_length=255)
     file_type = models.CharField(max_length=255)
     fileservice_uuid = models.CharField(max_length=255)
@@ -105,10 +106,10 @@ class SequencingFile(models.Model):
     assay = models.ForeignKey(Assay, on_delete=models.PROTECT, related_name="sequencingfile_assay")
 
     def __str__(self):
-        return "%s %s" % self.uuid, self.file_name
+        return "%s %s" % (self.uuid, self.file_name)
 
 class Attachment(models.Model):
-    uuid = models.UUIDField()
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     file_name = models.CharField(max_length=255)
     file_type = models.CharField(max_length=255)
     description = models.CharField(max_length=2048, blank=True, null=True)
@@ -117,10 +118,10 @@ class Attachment(models.Model):
     assay = models.ForeignKey(Assay, on_delete=models.PROTECT, related_name="attachment_assay")
 
     def __str__(self):
-        return "%s %s" % self.uuid, self.file_name
+        return "%s %s" % (self.uuid, self.file_name)
 
 class Interpretation(models.Model):
-    file_uuid = models.UUIDField()
+    file_uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     file_name = models.CharField(max_length=255)
     file_type = models.CharField(max_length=255)
     location = models.CharField(max_length=255, blank=True, null=True)
@@ -128,4 +129,4 @@ class Interpretation(models.Model):
     assay = models.ForeignKey(Assay, on_delete=models.PROTECT, related_name="interpretation_assay")
 
     def __str__(self):
-        return "%s %s" % self.file_name, self.file_uuid
+        return "%s %s" % (self.file_name, self.file_uuid)
