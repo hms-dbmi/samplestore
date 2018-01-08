@@ -19,4 +19,4 @@ python manage.py shell -c "from django.contrib.auth.models import User; User.obj
 
 chown -R www-data:www-data /app
 
-gunicorn samplestore.wsgi:application -b 0.0.0.0:8002  --user=www-data --group=www-data
+gunicorn samplestore.wsgi:application -b 0.0.0.0:8001  --user=www-data --group=www-data
