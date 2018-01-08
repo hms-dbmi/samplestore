@@ -15,6 +15,8 @@ import sys
 from django.utils.crypto import get_random_string
 from os.path import abspath, basename, dirname, join, normpath
 
+chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
