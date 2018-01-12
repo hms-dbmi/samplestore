@@ -6,7 +6,7 @@ class Subject(models.Model):
     This represents a person.
     """
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    external_id = models.CharField(max_length=255)
+    external_id = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return "%s %s" % (self.uuid, self.external_id)
