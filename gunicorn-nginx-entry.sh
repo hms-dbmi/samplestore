@@ -1,6 +1,17 @@
 #!/bin/bash
 
+MYSQL_USERNAME=$(aws ssm get-parameters --names $PS_PATH.mysql_username --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+MYSQL_PASSWORD=$(aws ssm get-parameters --names $PS_PATH.mysql_pw --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+MYSQL_HOST=$(aws ssm get-parameters --names $PS_PATH.mysql_host --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+MYSQL_PORT=$(aws ssm get-parameters --names $PS_PATH.mysql_port --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+
 DJANGO_SECRET=$(aws ssm get-parameters --names $PS_PATH.django_secret --with-decryption --region us-east-1 | jq -r '.Parameters[].Value')
+
+export MYSQL_USERNAME=$MYSQL_USERNAME
+export MYSQL_PASSWORD=$MYSQL_PASSWORD
+export MYSQL_HOST=$MYSQL_HOST
+export MYSQL_PORT=$MYSQL_PORT
+
 export SECRET_KEY=$DJANGO_SECRET
 
 FIRST_ADMIN_EMAIL="natebessa@gmail.com"
