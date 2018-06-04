@@ -120,6 +120,21 @@ TEMPLATES = [
 ]
 ########## END TEMPLATE CONFIGURATION
 
+########## APP CONFIGURATION
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'django_filters',
+    'api',
+    'pyauth0jwtrest',
+]
+########## END APP CONFIGURATION
+
 
 ########## MIDDLEWARE CONFIGURATION
 MIDDLEWARE = [
@@ -137,26 +152,6 @@ MIDDLEWARE = [
 ########## URL CONFIGURATION
 ROOT_URLCONF = 'samplestore.urls'
 ########## END URL CONFIGURATION
-
-
-########## APP CONFIGURATION
-DJANGO_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'django_filters',
-    'api',
-]
-
-LOCAL_APPS = [
-]
-
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
-########## END APP CONFIGURATION
 
 
 ########## LOGGING CONFIGURATION
@@ -198,29 +193,38 @@ WSGI_APPLICATION = 'samplestore.wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
-######## AUTH CONFIG
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-##### END AUTH CONFIG
-
-
 ##### REST FRAMEWORK
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions'
+    ),
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'pyauth0jwtrest.authentication.Auth0JSONWebTokenAuthentication',
+    ),
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
-##### END REST FRAMEWORK CONFIG
+###### END REST FRAMEWORK CONFIG
+
+###### AUTH CONFIG
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend') 
+
+AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
+AUTH0_CLIENT_ID_LIST = os.environ.get("AUTH0_CLIENT_ID_LIST")
+AUTH0_SECRET = os.environ.get("AUTH0_SECRET")
+
+# Setting needed for py-auth0-jwt-rest package.
+AUTH0 = {
+    'CLIENT_ID': os.environ.get("AUTH0_CLIENT_ID"), # TODO PHASE OUT
+    'CLIENT_ID_LIST': os.environ.get("AUTH0_CLIENT_ID_LIST"),
+    'DOMAIN': os.environ.get("AUTH0_DOMAIN"),
+    'ALGORITHM': 'RS256',
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+    'AUTHORIZATION_EXTENSION': False,
+}
+######
 
 try:
     from .local_settings import *

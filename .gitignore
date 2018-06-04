@@ -1,16 +1,15 @@
+app/assets
+app/db.sqlite3
+app/error.log
+app/debug.log
+
+app/samplestore/local_settings.py
 app/__pycache__/*
 app/**/__pycache__/*
 
-app/assets
+samplestoredb-data/*
 
-app/db.sqlite3
-
-app/error.log
-app/debug.log
 debug.log
 error.log
-
 .DS_Store
-
-app/samplestore/local_settings.py
 docker-compose.override.yml
