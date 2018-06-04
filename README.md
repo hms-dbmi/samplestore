@@ -13,3 +13,11 @@ This app uses Django Rest Framework to expose an API for managing a collection o
 7. Run 'docker-compose build'
 8. Run 'docker-compose up'
 9. Go to http://0.0.0.0:8000
+
+## Authentication
+
+Sample Store uses DBMI's own py-auth0-jwt-rest pypi package to authenticate requests. This package expects that incoming requests to the Sample Store have an "Authorization" request header with a value of "JWT [jwt encoded string]". The package allows for this application to accept requests from multiple different Auth0 Client IDs within the greater HMS DBMI Auth0 account.
+
+## Permissions
+
+Object level permissions will be stored in DBMI's SciAuthZ microservice.
